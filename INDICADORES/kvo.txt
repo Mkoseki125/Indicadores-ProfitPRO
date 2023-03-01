@@ -1,0 +1,32 @@
+Parametro                     
+  Longa(55);
+  Curta(34);
+  Sinal(13);
+  Histograma(Verdadeiro);
+  Linha_KO(Verdadeiro);
+  Linha_Sinal(Verdadeiro);
+var
+  ko, v, s, c, l, h : real;
+  cor : inteiro;
+
+Inicio
+
+  v := Volume;
+  Se TypicalPrice < TypicalPrice[1] entao v := Neg(v);
+
+  c := MediaExp(Curta, v);
+  l := MediaExp(Longa, v);
+
+  ko := c - l;
+  s := MediaExp(Sinal, ko);
+  h := ko - s;
+
+  Se Histograma entao Plot(h);
+  
+  Se Linha_KO entao Plot2(ko); // Linha Azul
+  Se Linha_Sinal entao Plot3(s); // Linha Púrpura
+  
+  Se h >= 0 entao cor := 6599780 senao cor := 7566335;
+  SetPlotColor(1, cor);
+
+Fim;
