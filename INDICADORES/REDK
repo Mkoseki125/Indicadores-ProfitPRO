@@ -1,0 +1,70 @@
+const
+  fundo = clCREAM;
+  alta = clVerde;
+  baixa = clVermelho;
+
+var
+  r, l, r_m, l_m, del_l, f, s, i : real;
+  c1, c2 : inteiro;
+
+Inicio
+  r := MediaExp(6, close);  // Linha principal, rastreia o preço
+  l := MediaExp(8, open);   // Linhas Sinal
+  f := WAverage(close, 24); // Linha Base
+
+  r_m := r - f;
+  l_m := l - f;
+  del_l := WAverage(l_m, 3); // Linha Sinal + Delay
+
+  s:=0; i:=0;
+
+  Se (r_m >= del_l) e (r_m > 0) e (del_l > 0) entao
+    inicio
+      s := r_m;
+      i := del_l;    
+      c1 := alta;
+      c2 := fundo; 
+    fim
+  Senao Se (r_m >= del_l) e (r_m < 0) e (del_l < 0) entao
+    inicio
+      s := del_l;
+      i := r_m;    
+      c1 := alta;
+      c2 := fundo; 
+    fim
+  Senao Se (r_m >= del_l) e (r_m > 0) e (del_l < 0) entao
+    inicio
+      s := r_m;
+      i := del_l;    
+      c1 := alta;
+      c2 := alta; 
+    fim
+  Senao Se (r_m < del_l) e (del_l < 0) e (r_m < 0) entao
+    inicio
+      s := r_m;
+      i := del_l;    
+      c1 := baixa;
+      c2 := fundo; 
+    fim
+  Senao Se (r_m < del_l) e (del_l > 0) e (r_m > 0) entao
+    inicio
+      s := del_l;
+      i := r_m;      
+      c1 := baixa;
+      c2 := fundo; 
+    fim 
+  Senao Se (r_m < del_l) e (del_l > 0) e (r_m < 0) entao
+    inicio
+      s := r_m;
+      i := del_l;    
+      c1 := baixa;
+      c2 := baixa; 
+    fim;   
+
+  Plot(s);
+  Plot2(i);
+
+  SetPlotColor(1, c1);
+  SetPlotColor(2, c2);
+
+Fim;
