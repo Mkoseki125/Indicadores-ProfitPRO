@@ -9,3 +9,5 @@ Espero que te ajude a ter sucesso no mercado financeiro.
 LISTA DE INDICADORES
 
 - Volume Acumulado em Topos e Fundos
+- REDK
+- KVO
