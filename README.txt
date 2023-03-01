@@ -8,4 +8,4 @@ Espero que te ajude a ter sucesso no mercado financeiro.
 
 LISTA DE INDICADORES
 
-- Soma de Saldo de Agressão
+- Volume Acumulado em Topos e Fundos

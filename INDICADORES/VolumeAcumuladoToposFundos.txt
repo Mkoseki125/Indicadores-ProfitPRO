@@ -1,0 +1,31 @@
+Parametro
+  Periodo(5);  
+
+var
+  tf,x,y,vAcum : Real;
+  novoTF : booleano;
+  i, cor : inteiro;
+Inicio
+
+  tf := TopBottomDetector(Periodo);
+
+  Se (tf <> 0) e (CurrentBar <> i) entao
+    inicio
+      i := CurrentBar;
+      Se (x = 0) entao x := tf Senao y := tf; 
+    fim;
+
+  vAcum := Summation(Volume, CurrentBar - i);
+  Plot(vAcum);
+
+  // Coloração
+  Se (x <> 0) e (y <> 0) entao
+    inicio
+      se (y > x) então cor := clVermelho
+      senao se (y < x) entao cor := clLime;
+      x := y;
+      y := 0;
+    fim;      
+  SetPlotColor(1, cor);
+
+Fim;
